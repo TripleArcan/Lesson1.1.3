@@ -16,6 +16,7 @@ public class Util {
     private final static String URL = "jdbc:mysql://localhost:3306/lesson1.1.4";
     private final static String USERNAME = "root";
     private final static String PASSWORD = "Loga987321";
+    private static SessionFactory getSessionFactory;
 
     public static void main(String[] args) {
 
@@ -30,8 +31,6 @@ public class Util {
         return connection;
     }
     public static SessionFactory getSessionFactory() {
-        SessionFactory sessionFactory = null;
-
         try {
             Configuration configuration = new Configuration();
 
@@ -55,11 +54,11 @@ public class Util {
             ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                     .applySettings(configuration.getProperties()).build();
 
-            sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+            getSessionFactory = configuration.buildSessionFactory(serviceRegistry);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return sessionFactory;
+        return getSessionFactory;
     }
 }
